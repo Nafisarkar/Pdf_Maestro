@@ -102,7 +102,7 @@ function Footer({
 
             <div className="flex items-center gap-0.5 px-2">
               <Input
-                className="h-4 w-7 text-muted-foreground/80 p-0 text-center bg-transparent dark:bg-transparent border-none shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 font-medium "
+                className="h-4 w-7 !text-[10px] text-muted-foreground/80 p-0 text-center bg-transparent dark:bg-transparent border-none shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 font-medium "
                 value={inputValue}
                 onChange={handleInputChange}
                 onBlur={handleInputBlur}

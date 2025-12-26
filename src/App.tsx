@@ -1,5 +1,5 @@
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import Navbar from "./components/navbar";
+import Footer from "./components/footer";
 import { Button } from "./components/ui/button";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { open } from "@tauri-apps/plugin-dialog";
@@ -116,7 +116,7 @@ function App() {
         ) : (
           <div className="flex-1 w-full flex flex-col items-center justify-center">
             <div
-              className={`bg-white shadow-2xl border border-border/40 rounded-sm overflow-hidden transition-all duration-500 ${
+              className={`bg-white shadow-2xl border border-border/40 rounded-sm overflow-hidden transition-all duration-500 max-w-[1200px] ${
                 isResizing
                   ? "opacity-40 scale-[0.99] blur-[2px]"
                   : "opacity-100 scale-100 blur-0"
@@ -165,7 +165,7 @@ function WelcomeScreen({ onSelect }: { onSelect: () => void }) {
         <FileUp className="size-10 text-muted-foreground/40 group-hover:text-primary transition-colors duration-300" />
 
         <div className="mt-6 space-y-1">
-          <h1 className="text-sm font-bold tracking-[0.4em] uppercase text-foreground/80">
+          <h1 className="text-[11px] font-bold tracking-[0.4em] uppercase text-foreground/80">
             Pdf Maestro
           </h1>
           <p className="text-[9px] uppercase tracking-[0.3em] text-muted-foreground/60">

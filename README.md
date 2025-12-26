@@ -1,73 +1,71 @@
-# React + TypeScript + Vite
+# 🎼 PDF MAESTRO
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**The Ultra-Minimalist, High-Performance PDF Reader**
 
-Currently, two official plugins are available:
+[![Tauri](https://img.shields.io/badge/Tauri-v2-FFC131?logo=tauri&logoColor=white&style=flat-square)](https://tauri.app/)
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white&style=flat-square)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white&style=flat-square)](https://www.typescriptlang.org/)
+[![Tailwind](https://img.shields.io/badge/Tailwind-4.0-06B6D4?logo=tailwindcss&logoColor=white&style=flat-square)](https://tailwindcss.com/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+[Features](#-features) • [Tech Stack](#-tech-stack) • [Installation](#-installation) • [Development](#-development)
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+## ✨ Overview
 
-## Expanding the ESLint configuration
+**PDF Maestro** is a professional-grade PDF viewer built with a focus on speed, aesthetics, and a distraction-free environment. It features a frameless, "glassmorphic" interface with sharp architectural design principles.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚀 Features
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- 🖼️ **Frameless UI**: Custom-built window controls for a seamless, modern desktop experience.
+- 🧊 **Glassmorphism**: Subtle blur and transparency effects that adapt to your system theme.
+- ⚡ **High Performance**: Powered by Rust (Tauri) and React-PDF for near-instant document loading.
+- 📐 **Sharp Design**: 4px radius architectural aesthetic—no "bubble" corners.
+- ⌨️ **Smart Navigation**: Manual page entry, smooth zoom, and "Fit to Screen" controls.
+- 📝 **Interactive**: Full support for text selection and annotation layers.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🛠️ Tech Stack
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **Frontend**: React 19, TypeScript, Vite
+- **Styling**: Tailwind CSS 4.0, Shadcn UI
+- **Backend**: Rust, Tauri v2
+- **PDF Engine**: React-PDF (PDF.js)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📦 Installation
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Prerequisites
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- [Rust](https://www.rust-lang.org/tools/install)
+- [Node.js / Bun](https://bun.sh/)
+
+### Setup
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/shaonannafi/pdf-maestro.git
+   ```
+2. Install dependencies:
+   ```bash
+   bun install
+   ```
+3. Run in development mode:
+   ```bash
+   bun tauri dev
+   ```
+
+## 🎨 Design Philosophy
+
+PDF Maestro follows a **"Sharp & Minimal"** design language:
+
+- **Typography**: High-tracking uppercase headers for a premium feel.
+- **Geometry**: Consistent 4px border radius across all components.
+- **Color**: Muted OKLCH color space for reduced eye strain.
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to open an issue or submit a pull request.
+
+---
+
+Made with ❤️ by [Shaon An Nafi](https://github.com/shaonannafi)
+********
