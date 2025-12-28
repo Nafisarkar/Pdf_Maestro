@@ -28,8 +28,8 @@ function Toptoolbar() {
   const colors = [
     { name: "Green", value: { r: 0, g: 1, b: 0 }, css: "bg-green-500" },
     { name: "Yellow", value: { r: 1, g: 1, b: 0 }, css: "bg-yellow-500" },
-    { name: "Red", value: { r: 1, g: 0, b: 0 }, css: "bg-red-500" },
-    { name: "Blue", value: { r: 0, g: 0, b: 1 }, css: "bg-blue-500" },
+    { name: "Red", value: { r: 1, g: 0, b: 0 }, css: "bg-red-600" },
+    { name: "Blue", value: { r: 0, g: 0, b: 1 }, css: "bg-blue-700" },
   ];
 
   const tools: { id: Tool; icon: LucideIcon; label: string }[] = [
@@ -85,7 +85,10 @@ function Toptoolbar() {
               />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="center" className="min-w-[120px]">
+          <DropdownMenuContent
+            align="center"
+            className="min-w-[120px] p-1 ml-19 mt-2"
+          >
             {colors.map((c) => (
               <DropdownMenuItem
                 key={c.name}
