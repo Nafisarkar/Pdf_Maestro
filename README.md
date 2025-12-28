@@ -1,4 +1,4 @@
-# 🎼 PDF MAESTRO
+# 🎼 MAESTRO
 
 **The Ultra-Minimalist, High-Performance PDF Reader**
 
@@ -13,7 +13,7 @@
 
 ## ✨ Overview
 
-**PDF Maestro** is a professional-grade PDF viewer built with a focus on speed, aesthetics, and a distraction-free environment. It features a frameless, "glassmorphic" interface with sharp architectural design principles.
+**Maestro** is a professional-grade PDF viewer built with a focus on speed, aesthetics, and a distraction-free environment. It features a frameless, "glassmorphic" interface with sharp architectural design principles.
 
 ## 🚀 Features
 
@@ -55,7 +55,7 @@
 
 ## 🎨 Design Philosophy
 
-PDF Maestro follows a **"Sharp & Minimal"** design language:
+Maestro follows a **"Sharp & Minimal"** design language:
 
 - **Typography**: High-tracking uppercase headers for a premium feel.
 - **Geometry**: Consistent 4px border radius across all components.
@@ -68,4 +68,5 @@ Contributions are welcome! Feel free to open an issue or submit a pull request.
 ---
 
 Made with ❤️ by [Shaon An Nafi](https://github.com/shaonannafi)
-********
+
+---

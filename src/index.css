@@ -1,13 +1,16 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Geist+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Geist+Mono&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @variant dark (&:where(.dark, .dark *));
 
-@theme inline {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+@theme {
+  --font-sans: "Inconsolata", monospace;
   --font-mono: "Geist Mono", monospace;
+}
+
+@theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);

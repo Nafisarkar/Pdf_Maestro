@@ -1,8 +1,8 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
-  "productName": "Pdf-Maestro",
+  "productName": "Maestro",
   "version": "0.1.0",
-  "identifier": "com.pdfmaestro.desktop",
+  "identifier": "com.maestro.desktop",
   "build": {
     "frontendDist": "../dist",
     "devUrl": "http://localhost:5173",
@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "Pdf Maestro",
+        "title": "Maestro",
         "width": 800,
         "height": 600,
         "resizable": true,

@@ -16,21 +16,28 @@ import {
 import { Input } from "./ui/input";
 import { useEffect, useState } from "react";
 import { open } from "@tauri-apps/plugin-shell";
+import { useAtom } from "jotai";
+import { userSettingsAtom } from "@/lib/atoms";
 
 function Footer({
   currentpage,
   totalpage,
   scale,
   onPageChange,
-  onScaleChange,
+  onZoomIn,
+  onZoomOut,
+  onResetZoom,
 }: {
   currentpage: number;
   totalpage: number;
   scale: number;
   onPageChange: (offset: number) => void;
-  onScaleChange: (newScale: number | ((prev: number) => number)) => void;
+  onZoomIn: () => void;
+  onZoomOut: () => void;
+  onResetZoom: () => void;
 }) {
   const [inputValue, setInputValue] = useState(currentpage.toString());
+  const [userSettings, setUserSettings] = useAtom(userSettingsAtom);
 
   useEffect(() => {
     setInputValue(currentpage.toString());
@@ -56,35 +63,37 @@ function Footer({
   };
 
   return (
-    <footer className="w-full h-7 px-3 flex items-center justify-between border-t border-border/40 bg-background text-[10px] uppercase tracking-[0.15em] font-medium text-muted-foreground select-none">
-      <div className="flex items-center gap-3">
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <div
-                className="flex items-center gap-1.5 cursor-pointer hover:text-muted-foreground transition-colors"
-                onClick={() => open("https://github.com/Nafisarkar")}
+    <footer className="w-full h-7 px-2 flex items-center justify-between border-t border-border/40 bg-background text-[10px] uppercase tracking-[0.15em] font-medium text-muted-foreground select-none">
+      {!userSettings.hidedevinfo && (
+        <div className="flex items-center gap-2">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div
+                  className="flex items-center gap-1.5 cursor-pointer hover:text-muted-foreground transition-colors"
+                  onClick={() => open("https://github.com/Nafisarkar")}
+                >
+                  <Heart
+                    size={13}
+                    color="#f50076"
+                    strokeWidth={2.0}
+                    className="animate-pulse fill-pink-600 shadow drop-shadow-2xl"
+                  />
+                  <span className="text-muted-foreground/20 text-[10px]">
+                    Shaon An Nafi
+                  </span>
+                </div>
+              </TooltipTrigger>
+              <TooltipContent
+                side="top"
+                className="text-[12px] uppercase tracking-tight font-bold"
               >
-                <Heart
-                  size={13}
-                  color="#f50076"
-                  strokeWidth={2.0}
-                  className="animate-pulse fill-pink-600 shadow drop-shadow-2xl"
-                />
-                <span className="text-muted-foreground/20 text-[8px]">
-                  Shaon An Nafi
-                </span>
-              </div>
-            </TooltipTrigger>
-            <TooltipContent
-              side="top"
-              className="text-[10px] uppercase tracking-tight font-light "
-            >
-              Thanks for your support!
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      </div>
+                Thanks for your support!
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
+      )}
 
       {totalpage > 0 && (
         <div className="flex items-center  ml-auto">
@@ -132,7 +141,7 @@ function Footer({
               variant="ghost"
               size="icon"
               className="size-5 rounded-none hover:bg-muted/30"
-              onClick={() => onScaleChange((s) => Math.max(0.5, s - 0.1))}
+              onClick={onZoomOut}
               disabled={scale <= 0.5}
             >
               <Minus className="size-3 opacity-50" />
@@ -146,8 +155,8 @@ function Footer({
               variant="ghost"
               size="icon"
               className="size-5 rounded-none hover:bg-muted/30"
-              onClick={() => onScaleChange((s) => Math.min(2.5, s + 0.1))}
-              disabled={scale >= 2.5}
+              onClick={onZoomIn}
+              disabled={scale >= 3.0}
             >
               <Plus className="size-3 opacity-50" />
             </Button>
@@ -158,7 +167,7 @@ function Footer({
               variant="ghost"
               size="icon"
               className="size-5 rounded-none hover:bg-muted/30"
-              onClick={() => onScaleChange(1.0)}
+              onClick={onResetZoom}
               title="Fit to Screen"
             >
               <Maximize className="size-3 opacity-50" />

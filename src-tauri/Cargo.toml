@@ -1,5 +1,5 @@
 [package]
-name = "app"
+name = "maestro"
 version = "0.1.0"
 description = "A Tauri App"
 authors = ["you"]
@@ -27,3 +27,4 @@ tauri-plugin-dialog = "2"
 tauri-plugin-fs = "2"
 tauri-plugin-shell = "2"
 tauri-plugin-prevent-default = "2"
+tauri-plugin-single-instance = "2"

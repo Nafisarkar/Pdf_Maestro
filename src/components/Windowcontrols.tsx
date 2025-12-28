@@ -7,7 +7,7 @@ function WindowControls() {
     <div className="flex items-center h-8">
       <button
         onClick={() => appWindow.minimize()}
-        className="group flex items-center justify-center w-11 h-8 transition-colors hover:bg-muted/80"
+        className="group flex items-center justify-center w-11 h-full transition-colors hover:bg-muted/80"
         title="Minimize"
       >
         <svg
@@ -24,7 +24,7 @@ function WindowControls() {
 
       <button
         onClick={() => appWindow.toggleMaximize()}
-        className="group flex items-center justify-center w-11 h-8 transition-colors hover:bg-muted/80"
+        className="group flex items-center justify-center w-11 h-full transition-colors hover:bg-muted/80"
         title="Maximize"
       >
         <svg
@@ -41,7 +41,7 @@ function WindowControls() {
 
       <button
         onClick={() => appWindow.close()}
-        className="group flex items-center justify-center w-11 h-8 transition-colors hover:bg-destructive hover:text-destructive-foreground"
+        className="group flex items-center justify-center w-11 h-full transition-colors hover:bg-red-500 hover:text-destructive-foreground"
         title="Close"
       >
         <svg
