@@ -62,63 +62,63 @@ function RouteComponent() {
         {!pdfUrl ? (
           <WelcomeScreen onSelect={selectPdf} />
         ) : (
-          <div className="flex-1 w-full flex flex-col items-center justify-center">
+          <div className="flex-1 w-full flex flex-col">
             <Toptoolbar />
-            <div
-              className={`bg-white shadow-2xl border border-border/40 rounded-sm overflow-hidden transition-all duration-500 max-w-300 ${
-                isResizing ? "opacity-40  blur-[2px]" : "opacity-100  blur-0"
-              }`}
-            >
-              <Document
-                file={pdfUrl}
-                onLoadSuccess={({ numPages }) => setNumPages(numPages)}
-                loading={null}
+            <div className="flex-1 w-full flex flex-col items-center justify-center mt-9">
+              <div
+                className={`bg-white shadow-2xl border border-border/40 rounded-sm overflow-hidden transition-all duration-500 max-w-300 ${
+                  isResizing ? "opacity-40  blur-[2px]" : "opacity-100  blur-0"
+                }`}
               >
-                <div onMouseUp={handleMouseUp} className="relative">
-                  <Page
-                    pageNumber={pageNumber}
-                    width={pageWidth || 400}
-                    loading={null}
-                    devicePixelRatio={Math.min(2, window.devicePixelRatio)}
-                    onRenderSuccess={() => setIsPageLoading(false)}
-                    onLoadStart={() => setIsPageLoading(true)}
-                    onLoadSuccess={(page) =>
-                      setPageDims({
-                        w: page.originalWidth,
-                        h: page.originalHeight,
-                      })
-                    }
-                    className={`transition-opacity duration-300 ${
-                      isPageLoading ? "opacity-0" : "opacity-100"
-                    }`}
-                  >
-                    {pageDims && (
-                      <HighlightOverlay
-                        highlights={highlights}
-                        pageNumber={pageNumber}
-                        originalWidth={pageDims.w}
-                        originalHeight={pageDims.h}
-                      />
-                    )}
-                  </Page>
-                </div>
-              </Document>
+                <Document
+                  file={pdfUrl}
+                  onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+                  loading={null}
+                >
+                  <div onMouseUp={handleMouseUp} className="relative">
+                    <Page
+                      pageNumber={pageNumber}
+                      width={pageWidth || 400}
+                      loading={null}
+                      devicePixelRatio={Math.min(2, window.devicePixelRatio)}
+                      onRenderSuccess={() => setIsPageLoading(false)}
+                      onLoadStart={() => setIsPageLoading(true)}
+                      onLoadSuccess={(page) =>
+                        setPageDims({
+                          w: page.originalWidth,
+                          h: page.originalHeight,
+                        })
+                      }
+                      className={`transition-opacity duration-300 ${
+                        isPageLoading ? "opacity-0" : "opacity-100"
+                      }`}
+                    >
+                      {pageDims && (
+                        <HighlightOverlay
+                          highlights={highlights}
+                          pageNumber={pageNumber}
+                          originalWidth={pageDims.w}
+                          originalHeight={pageDims.h}
+                        />
+                      )}
+                    </Page>
+                  </div>
+                </Document>
+              </div>
             </div>
           </div>
         )}
       </main>
 
-      {pdfUrl && (
-        <Footer
-          currentpage={pageNumber}
-          totalpage={numPages}
-          scale={scale}
-          onPageChange={changePage}
-          onZoomIn={zoomIn}
-          onZoomOut={zoomOut}
-          onResetZoom={resetZoom}
-        />
-      )}
+      <Footer
+        currentpage={pageNumber}
+        totalpage={numPages}
+        scale={scale}
+        onPageChange={changePage}
+        onZoomIn={zoomIn}
+        onZoomOut={zoomOut}
+        onResetZoom={resetZoom}
+      />
     </>
   );
 }

@@ -9,7 +9,6 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import {
-  Hand,
   Highlighter,
   MousePointer2,
   Save,
@@ -35,13 +34,12 @@ function Toptoolbar() {
 
   const tools: { id: Tool; icon: LucideIcon; label: string }[] = [
     { id: "select", icon: MousePointer2, label: "Select" },
-    { id: "pan", icon: Hand, label: "Pan" },
     { id: "highlighter", icon: Highlighter, label: "Highlighter" },
   ];
 
   return (
-    <div className="fixed top-10 left-1/2 -translate-x-1/2 h-9 px-1.5 flex items-center gap-1 border border-border/40 bg-background/70 backdrop-blur-xl z-50 select-none rounded-xl shadow-2xl shadow-black/5 transition-all duration-300 hover:bg-background/90">
-      <div className="flex items-center gap-0.5">
+    <div className="fixed flex h-9 w-full bg-secondary/30 backdrop-blur-sm  items-start justify-start   select-none z-10 ">
+      <div className="flex h-fit items-center gap-1 px-1.5 py-1 pointer-events-auto w-full">
         {tools.map((tool) => (
           <Tooltip key={tool.id}>
             <TooltipTrigger asChild>
@@ -50,13 +48,13 @@ function Toptoolbar() {
                 size="icon-sm"
                 onClick={() => setActiveTool(tool.id)}
                 className={cn(
-                  "h-7 w-7 rounded-lg transition-all duration-200",
+                  "h-7 w-7 rounded-full transition-all duration-200",
                   activeTool === tool.id
-                    ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20"
-                    : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                    ? "bg-background text-foreground shadow-sm border border-border/50"
+                    : "text-muted-foreground hover:text-foreground hover:bg-background/40"
                 )}
               >
-                <tool.icon size={14} strokeWidth={2.5} />
+                <tool.icon size={14} strokeWidth={2} />
               </Button>
             </TooltipTrigger>
             <TooltipContent
@@ -68,17 +66,17 @@ function Toptoolbar() {
           </Tooltip>
         ))}
 
-        <div className="w-px h-4 bg-border/60 mx-1" />
+        <div className="w-px h-3 bg-border/30 mx-1" />
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
               variant="ghost"
               size="icon-sm"
-              className="h-7 w-7 rounded-lg hover:bg-accent/50"
+              className="h-7 w-7 rounded-full hover:bg-background/40"
             >
               <div
-                className="w-3.5 h-3.5 rounded-full border border-border/50 shadow-sm"
+                className="w-3 h-3 rounded-full border border-border/50 shadow-sm"
                 style={{
                   backgroundColor: `rgb(${highlightColor.r * 255}, ${
                     highlightColor.g * 255
@@ -101,7 +99,7 @@ function Toptoolbar() {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <div className="w-px h-4 bg-border/60 mx-1" />
+        <div className="w-px h-3 bg-border/30 mx-1" />
 
         <Tooltip>
           <TooltipTrigger asChild>
@@ -109,9 +107,9 @@ function Toptoolbar() {
               variant="ghost"
               size="icon-sm"
               onClick={() => pdfPath && savePdf(pdfPath)}
-              className="h-7 w-7 rounded-lg text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors"
+              className="h-7 w-7 rounded-full text-muted-foreground hover:text-foreground hover:bg-background/40 transition-colors"
             >
-              <Save size={14} strokeWidth={2.5} />
+              <Save size={14} strokeWidth={2} />
             </Button>
           </TooltipTrigger>
           <TooltipContent
