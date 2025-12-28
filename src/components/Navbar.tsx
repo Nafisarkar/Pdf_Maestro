@@ -7,19 +7,21 @@ function Navbar() {
   return (
     <nav
       data-tauri-drag-region
-      className="w-full h-8 flex items-center justify-between border-b bg-background sticky top-0 z-50 select-none pl-2"
+      className="w-full h-8 flex items-center justify-between bg-background/60 backdrop-blur-xl sticky top-0 z-50 select-none pl-3"
     >
       <div className="flex items-center justify-center pointer-events-none gap-1">
-        <span className="text-sm font-semibold tracking-tight">Maestro.</span>
+        <span className="text-[13px] font-bold tracking-wider opacity-60">
+          Maestro.
+        </span>
       </div>
 
       <div className="flex items-center">
         <Settings
-          size={"14"}
-          className="mr-2 cursor-pointer hover:opacity-80 transition-opacity"
+          size={"13"}
+          className="mr-3 text-muted-foreground/60 cursor-pointer hover:text-foreground transition-colors"
           onClick={() => navigate({ to: "/settings", replace: false })}
         />
-        <div className="h-2.5 w-px bg-white/10 self-center mx-2"></div>
+        <div className="h-3 w-px bg-border/40 self-center mx-1"></div>
         <WindowControls />
       </div>
     </nav>

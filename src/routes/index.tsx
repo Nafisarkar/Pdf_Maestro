@@ -57,7 +57,7 @@ function RouteComponent() {
     <>
       <main
         ref={containerRef}
-        className="flex-1 overflow-auto relative flex flex-col items-center p-2"
+        className="flex-1 overflow-auto relative flex flex-col items-center "
       >
         {!pdfUrl ? (
           <WelcomeScreen onSelect={selectPdf} />
@@ -108,15 +108,17 @@ function RouteComponent() {
         )}
       </main>
 
-      <Footer
-        currentpage={pageNumber}
-        totalpage={numPages}
-        scale={scale}
-        onPageChange={changePage}
-        onZoomIn={zoomIn}
-        onZoomOut={zoomOut}
-        onResetZoom={resetZoom}
-      />
+      {pdfUrl && (
+        <Footer
+          currentpage={pageNumber}
+          totalpage={numPages}
+          scale={scale}
+          onPageChange={changePage}
+          onZoomIn={zoomIn}
+          onZoomOut={zoomOut}
+          onResetZoom={resetZoom}
+        />
+      )}
     </>
   );
 }
