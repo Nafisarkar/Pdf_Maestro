@@ -1,6 +1,6 @@
 import { Settings } from "lucide-react";
-import WindowControls from "./WindowControls";
 import { useNavigate } from "@tanstack/react-router";
+import WindowControls from "./WindowControls";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ function Navbar() {
           className="mr-2 cursor-pointer hover:opacity-80 transition-opacity"
           onClick={() => navigate({ to: "/settings", replace: false })}
         />
-        <div className="h-[10px] w-[1px] bg-white/10 self-center mx-2"></div>
+        <div className="h-2.5 w-px bg-white/10 self-center mx-2"></div>
         <WindowControls />
       </div>
     </nav>

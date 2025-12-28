@@ -22,7 +22,6 @@ function RouteComponent() {
   return (
     <div className="flex-1 bg-muted/30 text-foreground p-5 font-sans antialiased overflow-auto">
       <main className="max-w-2xl mx-auto">
-        
         <header className="mb-8 border-b border-border/40 pb-4">
           <div className="flex items-center gap-4 mb-4">
             <button
@@ -37,7 +36,7 @@ function RouteComponent() {
               System Settings
             </h1>
           </div>
-          <p className="text-[10px] uppercase tracking-[0.1em] text-muted-foreground/60 mt-2">
+          <p className="text-[10px] uppercase tracking-widest text-muted-foreground/60 mt-2">
             Configure core environment parameters.
           </p>
         </header>

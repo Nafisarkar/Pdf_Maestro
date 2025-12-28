@@ -5,10 +5,14 @@ import { routeTree } from "./routeTree.gen";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { pdfjs } from "react-pdf";
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+// Ensure PDF.js worker loads correctly in production (Tauri)
+const workerUrl = new URL(
   "pdfjs-dist/build/pdf.worker.min.mjs",
   import.meta.url
-).toString();
+);
+pdfjs.GlobalWorkerOptions.workerPort = new Worker(workerUrl, {
+  type: "module",
+});
 
 const router = createRouter({ routeTree });
 

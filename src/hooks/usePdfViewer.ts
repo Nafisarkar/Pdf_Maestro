@@ -19,7 +19,7 @@ const ASPECT_RATIO = 0.707; // A4 aspect ratio
 
 export function usePdfViewer() {
   const [pdfUrl, setPdfUrl] = useAtom(pdfUrlAtom);
-  const [pdfPath, setPdfPath] = useAtom(pdfPathAtom);
+  const [, setPdfPath] = useAtom(pdfPathAtom);
   const [numPages, setNumPages] = useAtom(numPagesAtom);
   const [pageNumber, setPageNumber] = useAtom(pageNumberAtom);
   const [scale, setScale] = useAtom(scaleAtom);
@@ -51,7 +51,7 @@ export function usePdfViewer() {
         console.error("Failed to read file:", error);
       }
     },
-    [setPdfUrl, setPageNumber]
+    [setPdfUrl, setPdfPath, setPageNumber]
   );
 
   const selectPdf = useCallback(async () => {

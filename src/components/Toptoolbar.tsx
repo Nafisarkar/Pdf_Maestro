@@ -8,7 +8,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { Hand, Highlighter, MousePointer2, Save } from "lucide-react";
+import {
+  Hand,
+  Highlighter,
+  MousePointer2,
+  Save,
+  type LucideIcon,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAtomValue } from "jotai";
 import { pdfPathAtom } from "@/lib/atoms";
@@ -27,7 +33,7 @@ function Toptoolbar() {
     { name: "Blue", value: { r: 0, g: 0, b: 1 }, css: "bg-blue-500" },
   ];
 
-  const tools: { id: Tool; icon: React.ElementType; label: string }[] = [
+  const tools: { id: Tool; icon: LucideIcon; label: string }[] = [
     { id: "select", icon: MousePointer2, label: "Select" },
     { id: "pan", icon: Hand, label: "Pan" },
     { id: "highlighter", icon: Highlighter, label: "Highlighter" },
