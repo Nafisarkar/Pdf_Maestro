@@ -6,7 +6,11 @@ import { Document, Page } from "react-pdf";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
 import Toptoolbar from "@/components/Toptoolbar";
-
+import { usePdfHighlights } from "@/hooks/usePdfHighlights";
+import { HighlightOverlay } from "@/components/HighlightOverlay";
+import { useAtomValue } from "jotai";
+import { toolAtom } from "@/lib/atoms";
+import { useState } from "react";
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,
@@ -31,6 +35,24 @@ function RouteComponent() {
     resetZoom,
   } = usePdfViewer();
 
+  const { highlights, addHighlight } = usePdfHighlights();
+  const activeTool = useAtomValue(toolAtom);
+  const [pageDims, setPageDims] = useState<{ w: number; h: number } | null>(
+    null
+  );
+
+  const handleMouseUp = () => {
+    const selection = window.getSelection();
+    if (
+      activeTool === "highlighter" &&
+      selection &&
+      !selection.isCollapsed &&
+      pageDims
+    ) {
+      addHighlight(selection, pageNumber, pageDims.w, pageDims.h);
+    }
+  };
+
   return (
     <>
       <main
@@ -44,9 +66,7 @@ function RouteComponent() {
             <Toptoolbar />
             <div
               className={`bg-white shadow-2xl border border-border/40 rounded-sm overflow-hidden transition-all duration-500 max-w-300 ${
-                isResizing
-                  ? "opacity-40 scale-[0.99] blur-[2px]"
-                  : "opacity-100 scale-100 blur-0"
+                isResizing ? "opacity-40  blur-[2px]" : "opacity-100  blur-0"
               }`}
             >
               <Document
@@ -54,17 +74,34 @@ function RouteComponent() {
                 onLoadSuccess={({ numPages }) => setNumPages(numPages)}
                 loading={null}
               >
-                <Page
-                  pageNumber={pageNumber}
-                  width={pageWidth || 400}
-                  loading={null}
-                  devicePixelRatio={Math.min(2, window.devicePixelRatio)}
-                  onRenderSuccess={() => setIsPageLoading(false)}
-                  onLoadStart={() => setIsPageLoading(true)}
-                  className={`transition-opacity duration-300 ${
-                    isPageLoading ? "opacity-0" : "opacity-100"
-                  }`}
-                />
+                <div onMouseUp={handleMouseUp} className="relative">
+                  <Page
+                    pageNumber={pageNumber}
+                    width={pageWidth || 400}
+                    loading={null}
+                    devicePixelRatio={Math.min(2, window.devicePixelRatio)}
+                    onRenderSuccess={() => setIsPageLoading(false)}
+                    onLoadStart={() => setIsPageLoading(true)}
+                    onLoadSuccess={(page) =>
+                      setPageDims({
+                        w: page.originalWidth,
+                        h: page.originalHeight,
+                      })
+                    }
+                    className={`transition-opacity duration-300 ${
+                      isPageLoading ? "opacity-0" : "opacity-100"
+                    }`}
+                  >
+                    {pageDims && (
+                      <HighlightOverlay
+                        highlights={highlights}
+                        pageNumber={pageNumber}
+                        originalWidth={pageDims.w}
+                        originalHeight={pageDims.h}
+                      />
+                    )}
+                  </Page>
+                </div>
               </Document>
             </div>
           </div>
