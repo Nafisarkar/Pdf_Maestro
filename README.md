@@ -1,4 +1,6 @@
-# 🎼 MAESTRO
+<p align="center">
+  <img src="public/image.png" alt="Maestro Banner" width="100%">
+</p>
 
 **The Ultra-Minimalist, High-Performance PDF Reader**
 
@@ -64,9 +66,3 @@ Maestro follows a **"Sharp & Minimal"** design language:
 ## 🤝 Contributing
 
 Contributions are welcome! Feel free to open an issue or submit a pull request.
-
----
-
-Made with ❤️ by [Shaon An Nafi](https://github.com/shaonannafi)
-
----
