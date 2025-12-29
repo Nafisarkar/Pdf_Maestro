@@ -17,5 +17,5 @@ export const highlightColorAtom = atom<{ r: number; g: number; b: number }>({
 export const userSettingsAtom = atomWithStorage("user-settings", {
   darkmode: true,
   hidedevinfo: false,
-  hidetoptoolbar: true,
+  hidetoptoolbar: false,
 });

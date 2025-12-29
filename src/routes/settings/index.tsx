@@ -144,7 +144,10 @@ function RouteComponent() {
         </div>
 
         {/* Developer Card Section */}
-        <div className="mt-12 pt-8 border-t border-border/40">
+        <div
+          className="mt-12 pt-8 border-t border-border/40"
+          onClick={() => open("https://github.com/Nafisarkar")}
+        >
           <section>
             <h2 className="text-[9px] uppercase tracking-[0.2em] text-muted-foreground/70 mb-5 flex items-center gap-2">
               <Code2 className="size-3" /> Developer Profile
@@ -152,7 +155,11 @@ function RouteComponent() {
             <div className="bg-muted/50 border border-border/60 p-6 rounded-sm">
               <div className="flex items-start gap-6">
                 <div className="size-16 bg-primary/5 border border-primary/10 flex items-center justify-center rounded-sm shrink-0">
-                  <Code2 className="size-8 text-primary/60" />
+                  <img
+                    src="https://avatars.githubusercontent.com/u/41770461?v=4"
+                    alt="Developer Avatar"
+                    className="size-14 rounded-sm"
+                  />
                 </div>
                 <div className="flex-1">
                   <h3 className="text-sm font-bold uppercase tracking-wider text-foreground">
