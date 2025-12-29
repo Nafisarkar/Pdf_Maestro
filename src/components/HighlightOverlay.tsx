@@ -1,4 +1,7 @@
 import { type Highlight } from "@/lib/types";
+import { useAtomValue } from "jotai";
+import { toolAtom } from "@/lib/atoms";
+import { usePdfHighlights } from "@/hooks/usePdfHighlights";
 
 export function HighlightOverlay({
   highlights,
@@ -12,10 +15,16 @@ export function HighlightOverlay({
   originalHeight: number;
 }) {
   const pageHighlights = highlights.filter((h) => h.page === pageNumber);
+  const activeTool = useAtomValue(toolAtom);
+  const { removeHighlight } = usePdfHighlights();
 
   return (
-    <div className="absolute inset-0 pointer-events-none z-10">
-      {pageHighlights.map((h, i) =>
+    <div
+      className={`absolute inset-0 z-10 ${
+        activeTool === "eraser" ? "pointer-events-auto" : "pointer-events-none"
+      }`}
+    >
+      {pageHighlights.map((h) =>
         h.rects.map((rect, j) => {
           // Calculate percentages
           const left = (rect.x / originalWidth) * 100;
@@ -27,7 +36,13 @@ export function HighlightOverlay({
           const color = h.highlightColor || { r: 0, g: 1, b: 0 };
           return (
             <div
-              key={`${i}-${j}`}
+              key={`${h.id}-${j}`}
+              onClick={() => {
+                if (activeTool === "eraser") {
+                  removeHighlight(h.id);
+                }
+              }}
+              className={activeTool === "eraser" ? "cursor-crosshair" : ""}
               style={{
                 position: "absolute",
                 backgroundColor: `rgba(${color.r * 255}, ${color.g * 255}, ${
@@ -38,6 +53,7 @@ export function HighlightOverlay({
                 top: `${top}%`,
                 width: `${width}%`,
                 height: `${height}%`,
+                pointerEvents: activeTool === "eraser" ? "auto" : "none",
               }}
             />
           );

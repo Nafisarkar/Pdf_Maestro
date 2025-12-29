@@ -63,7 +63,7 @@ function Footer({
   };
 
   return (
-    <footer className="w-full h-7 px-2 flex items-center justify-between border-t border-border/40 bg-background text-[10px] uppercase tracking-[0.15em] font-medium text-muted-foreground select-none">
+    <footer className="w-full h-7 px-2 flex items-center justify-between border-t border-border/40 bg-background text-[10px] uppercase tracking-[0.15em] font-medium text-muted-foreground/90 select-none">
       {!userSettings.hidedevinfo && (
         <div className="flex items-center gap-2">
           <TooltipProvider>
@@ -79,7 +79,7 @@ function Footer({
                     strokeWidth={2.0}
                     className="animate-pulse fill-pink-600 shadow drop-shadow-2xl"
                   />
-                  <span className="text-muted-foreground/20 text-[10px]">
+                  <span className="text-muted-foreground/60 text-[10px]">
                     Shaon An Nafi
                   </span>
                 </div>
@@ -106,18 +106,18 @@ function Footer({
               onClick={() => onPageChange(-1)}
               disabled={currentpage <= 1}
             >
-              <ChevronLeft className="size-3 opacity-50" />
+              <ChevronLeft className="size-3 opacity-80" />
             </Button>
 
             <div className="flex items-center gap-0.5 px-2">
               <Input
-                className="h-4 w-7 text-[10px]! text-muted-foreground/80 p-0 text-center bg-transparent dark:bg-transparent border-none shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 font-medium "
+                className="h-4 w-7 text-[10px]! text-muted-foreground p-0 text-center bg-transparent dark:bg-transparent border-none shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 font-medium "
                 value={inputValue}
                 onChange={handleInputChange}
                 onBlur={handleInputBlur}
                 onKeyDown={handleKeyDown}
               />
-              <span className="text-muted-foreground/30 translate-y-[0.5px]">
+              <span className="text-muted-foreground/60 translate-y-[0.5px]">
                 / {totalpage}
               </span>
             </div>
@@ -129,7 +129,7 @@ function Footer({
               onClick={() => onPageChange(1)}
               disabled={currentpage >= totalpage}
             >
-              <ChevronRight className="size-3 opacity-50" />
+              <ChevronRight className="size-3 opacity-80" />
             </Button>
           </div>
 
@@ -144,10 +144,10 @@ function Footer({
               onClick={onZoomOut}
               disabled={scale <= 0.5}
             >
-              <Minus className="size-3 opacity-50" />
+              <Minus className="size-3 opacity-80" />
             </Button>
 
-            <span className="min-w-8 text-center text-muted-foreground/80 font-medium px-2">
+            <span className="min-w-8 text-center text-muted-foreground font-medium px-2">
               {Math.round(scale * 100)}%
             </span>
 
@@ -158,7 +158,7 @@ function Footer({
               onClick={onZoomIn}
               disabled={scale >= 3.0}
             >
-              <Plus className="size-3 opacity-50" />
+              <Plus className="size-3 opacity-80" />
             </Button>
 
             <div className="h-2 w-px bg-border/50 mx-0.5" />
@@ -170,7 +170,7 @@ function Footer({
               onClick={onResetZoom}
               title="Fit to Screen"
             >
-              <Maximize className="size-3 opacity-50" />
+              <Maximize className="size-3 opacity-80" />
             </Button>
           </div>
         </div>

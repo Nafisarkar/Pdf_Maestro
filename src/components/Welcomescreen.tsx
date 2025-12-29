@@ -1,8 +1,12 @@
 import Silk from "./Silk";
 import { MousePointer2 } from "lucide-react";
 import { Button } from "./ui/button";
+import { useAtomValue } from "jotai";
+import { userSettingsAtom } from "@/lib/atoms";
 
 function WelcomeScreen({ onSelect }: { onSelect: () => void }) {
+  const userSavedSettings = useAtomValue(userSettingsAtom);
+
   return (
     <div className="flex-1 w-full h-full flex items-center justify-center relative overflow-hidden">
       {/* Background */}
@@ -20,10 +24,10 @@ function WelcomeScreen({ onSelect }: { onSelect: () => void }) {
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center max-w-md w-full px-6 text-center">
         <div className="mb-12 flex flex-col items-center">
-          <h1 className="text-3xl font-bold tracking-tighter mb-2 bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/50">
+          <h1 className="text-3xl font-bold tracking-tighter mb-2 bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/70">
             Maestro.
           </h1>
-          <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground/40 font-bold">
+          <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground/80 font-bold">
             Minimalist PDF Experience
           </p>
         </div>
@@ -41,7 +45,9 @@ function WelcomeScreen({ onSelect }: { onSelect: () => void }) {
 
       {/* Version Number */}
       <div className="absolute bottom-2 right-4 z-20">
-        <span className="text-[9px] font-mono text-muted-foreground/20 uppercase tracking-widest">
+        <span
+          className={`text-[9px] font-mono  uppercase tracking-widest ${!userSavedSettings.darkmode ? "text-muted-foreground/80" : "text-muted-foreground/50"}`}
+        >
           v0.1.0
         </span>
       </div>

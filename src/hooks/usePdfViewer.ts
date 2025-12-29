@@ -47,6 +47,7 @@ export function usePdfViewer() {
         });
         setPdfPath(filePath);
         setPageNumber(1);
+        setIsPageLoading(true);
       } catch (error) {
         console.error("Failed to read file:", error);
       }
@@ -118,24 +119,6 @@ export function usePdfViewer() {
       if (resizeTimeout.current) clearTimeout(resizeTimeout.current);
     };
   }, []);
-
-  // Keyboard Navigation
-  useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight") changePage(1);
-      if (e.key === "ArrowLeft") changePage(-1);
-      if (e.ctrlKey && (e.key === "+" || e.key === "=")) {
-        e.preventDefault();
-        zoomIn();
-      }
-      if (e.ctrlKey && (e.key === "-" || e.key === "_")) {
-        e.preventDefault();
-        zoomOut();
-      }
-    };
-    window.addEventListener("keydown", handleKey);
-    return () => window.removeEventListener("keydown", handleKey);
-  }, [changePage, zoomIn, zoomOut]);
 
   const pageWidth =
     Math.min(

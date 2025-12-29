@@ -9,8 +9,8 @@ import Toptoolbar from "@/components/Toptoolbar";
 import { usePdfHighlights } from "@/hooks/usePdfHighlights";
 import { HighlightOverlay } from "@/components/HighlightOverlay";
 import { useAtomValue } from "jotai";
-import { toolAtom } from "@/lib/atoms";
-import { useState } from "react";
+import { toolAtom, userSettingsAtom } from "@/lib/atoms";
+import { useState, useEffect } from "react";
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,
@@ -35,11 +35,38 @@ function RouteComponent() {
     resetZoom,
   } = usePdfViewer();
 
-  const { highlights, addHighlight } = usePdfHighlights();
+  const { highlights, addHighlight, setHighlights } = usePdfHighlights();
   const activeTool = useAtomValue(toolAtom);
+  const userSavedSettings = useAtomValue(userSettingsAtom);
   const [pageDims, setPageDims] = useState<{ w: number; h: number } | null>(
     null
   );
+
+  // Reset state when pdfUrl changes
+  const [currentPdfUrl, setCurrentPdfUrl] = useState(pdfUrl);
+  if (pdfUrl !== currentPdfUrl) {
+    setCurrentPdfUrl(pdfUrl);
+    setPageDims(null);
+    setHighlights([]);
+  }
+
+  // Keyboard Navigation
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") changePage(1);
+      if (e.key === "ArrowLeft") changePage(-1);
+      if (e.ctrlKey && (e.key === "+" || e.key === "=")) {
+        e.preventDefault();
+        zoomIn();
+      }
+      if (e.ctrlKey && (e.key === "-" || e.key === "_")) {
+        e.preventDefault();
+        zoomOut();
+      }
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [changePage, zoomIn, zoomOut]);
 
   const handleMouseUp = () => {
     const selection = window.getSelection();
@@ -63,14 +90,17 @@ function RouteComponent() {
           <WelcomeScreen onSelect={selectPdf} />
         ) : (
           <div className="flex-1 w-full flex flex-col">
-            <Toptoolbar />
-            <div className="flex-1 w-full flex flex-col items-center justify-center mt-9">
+            {!userSavedSettings.hidetoptoolbar && <Toptoolbar />}
+            <div
+              className={`flex-1 w-full flex flex-col items-center justify-center ${!userSavedSettings.hidetoptoolbar ? "mt-9" : ""}`}
+            >
               <div
-                className={`bg-white shadow-2xl border border-border/40 rounded-sm overflow-hidden transition-all duration-500 max-w-300 ${
+                className={`bg-white shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-2xl border border-border/60 rounded-sm overflow-hidden transition-all duration-500 ${
                   isResizing ? "opacity-40  blur-[2px]" : "opacity-100  blur-0"
                 }`}
               >
                 <Document
+                  key={pdfUrl}
                   file={pdfUrl}
                   onLoadSuccess={({ numPages }) => setNumPages(numPages)}
                   loading={null}
@@ -89,7 +119,7 @@ function RouteComponent() {
                           h: page.originalHeight,
                         })
                       }
-                      className={`transition-opacity duration-300 ${
+                      className={`transition-opacity duration-300 border-border/30 ${
                         isPageLoading ? "opacity-0" : "opacity-100"
                       }`}
                     >
@@ -110,15 +140,17 @@ function RouteComponent() {
         )}
       </main>
 
-      <Footer
-        currentpage={pageNumber}
-        totalpage={numPages}
-        scale={scale}
-        onPageChange={changePage}
-        onZoomIn={zoomIn}
-        onZoomOut={zoomOut}
-        onResetZoom={resetZoom}
-      />
+      {pdfUrl && (
+        <Footer
+          currentpage={pageNumber}
+          totalpage={numPages}
+          scale={scale}
+          onPageChange={changePage}
+          onZoomIn={zoomIn}
+          onZoomOut={zoomOut}
+          onResetZoom={resetZoom}
+        />
+      )}
     </>
   );
 }

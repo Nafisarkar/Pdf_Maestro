@@ -81,9 +81,18 @@ export function usePdfHighlights() {
 
     setHighlights((prev) => [
       ...prev,
-      { page: pageNumber, rects: mergedRects, highlightColor: currentColor },
+      {
+        id: crypto.randomUUID(),
+        page: pageNumber,
+        rects: mergedRects,
+        highlightColor: currentColor,
+      },
     ]);
     selection.removeAllRanges();
+  };
+
+  const removeHighlight = (id: string) => {
+    setHighlights((prev) => prev.filter((h) => h.id !== id));
   };
 
   // 2. Function to save the PDF
@@ -134,5 +143,5 @@ export function usePdfHighlights() {
     }
   };
 
-  return { highlights, addHighlight, savePdf };
+  return { highlights, setHighlights, addHighlight, removeHighlight, savePdf };
 }

@@ -20,7 +20,7 @@
         "transparent": false,
         "minWidth": 450,
         "minHeight": 600,
-        "devtools": true
+        "devtools": false
       }
     ],
     "security": {

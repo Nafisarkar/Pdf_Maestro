@@ -6,7 +6,7 @@ export const numPagesAtom = atom<number>(0);
 export const pageNumberAtom = atom<number>(1);
 export const scaleAtom = atom<number>(1.0);
 
-export type Tool = "pan" | "highlighter" | "select";
+export type Tool = "pan" | "highlighter" | "select" | "eraser";
 export const toolAtom = atom<Tool>("select");
 export const highlightColorAtom = atom<{ r: number; g: number; b: number }>({
   r: 0,
@@ -16,6 +16,6 @@ export const highlightColorAtom = atom<{ r: number; g: number; b: number }>({
 
 export const userSettingsAtom = atomWithStorage("user-settings", {
   darkmode: true,
-  hidedevinfo: true,
-  showfloatingtoolbar: true,
+  hidedevinfo: false,
+  hidetoptoolbar: true,
 });

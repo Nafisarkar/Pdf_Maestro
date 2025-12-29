@@ -12,6 +12,7 @@ import {
   Highlighter,
   MousePointer2,
   Save,
+  Eraser,
   type LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -23,7 +24,7 @@ function Toptoolbar() {
   const [activeTool, setActiveTool] = useAtom(toolAtom);
   const [highlightColor, setHighlightColor] = useAtom(highlightColorAtom);
   const pdfPath = useAtomValue(pdfPathAtom);
-  const { savePdf } = usePdfHighlights();
+  const { highlights, savePdf } = usePdfHighlights();
 
   const colors = [
     { name: "Green", value: { r: 0, g: 1, b: 0 }, css: "bg-green-500" },
@@ -35,22 +36,23 @@ function Toptoolbar() {
   const tools: { id: Tool; icon: LucideIcon; label: string }[] = [
     { id: "select", icon: MousePointer2, label: "Select" },
     { id: "highlighter", icon: Highlighter, label: "Highlighter" },
+    { id: "eraser", icon: Eraser, label: "Eraser" },
   ];
 
   return (
-    <div className="fixed flex h-9 w-full bg-secondary/30 backdrop-blur-sm  items-start justify-start   select-none z-10 ">
+    <div className="fixed flex h-9 w-full bg-secondary/80 backdrop-blur-md border-b border-border/40 items-start justify-start select-none z-10 shadow-sm">
       <div className="flex h-fit items-center gap-1 px-1.5 py-1 pointer-events-auto w-full">
         {tools.map((tool) => (
           <Tooltip key={tool.id}>
             <TooltipTrigger asChild>
               <Button
-                variant="ghost"
+                variant="secondary"
                 size="icon-sm"
                 onClick={() => setActiveTool(tool.id)}
                 className={cn(
                   "h-7 w-7 rounded-full transition-all duration-200",
                   activeTool === tool.id
-                    ? "bg-background text-foreground shadow-sm border border-border/50"
+                    ? "bg-primary/40 text-primary-foreground shadow-md scale-105"
                     : "text-muted-foreground hover:text-foreground hover:bg-background/40"
                 )}
               >
@@ -87,7 +89,7 @@ function Toptoolbar() {
           </DropdownMenuTrigger>
           <DropdownMenuContent
             align="center"
-            className="min-w-[120px] p-1 ml-19 mt-2"
+            className="min-w-30 p-1 ml-19 mt-2"
           >
             {colors.map((c) => (
               <DropdownMenuItem
@@ -102,26 +104,29 @@ function Toptoolbar() {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <div className="w-px h-3 bg-border/30 mx-1" />
-
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon-sm"
-              onClick={() => pdfPath && savePdf(pdfPath)}
-              className="h-7 w-7 rounded-full text-muted-foreground hover:text-foreground hover:bg-background/40 transition-colors"
-            >
-              <Save size={14} strokeWidth={2} />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent
-            side="bottom"
-            className="text-[10px] uppercase tracking-widest font-bold"
-          >
-            Save PDF
-          </TooltipContent>
-        </Tooltip>
+        {highlights.length > 0 && (
+          <>
+            <div className="w-px h-3 bg-border/30 mx-1" />
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon-sm"
+                  onClick={() => pdfPath && savePdf(pdfPath)}
+                  className="h-7 w-7 rounded-full text-primary hover:text-primary hover:bg-primary/10 transition-colors animate-in fade-in zoom-in duration-300"
+                >
+                  <Save size={14} strokeWidth={2} />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent
+                side="bottom"
+                className="text-[10px] uppercase tracking-widest font-bold"
+              >
+                Save PDF
+              </TooltipContent>
+            </Tooltip>
+          </>
+        )}
       </div>
     </div>
   );
